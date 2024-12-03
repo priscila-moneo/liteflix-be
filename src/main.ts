@@ -9,16 +9,11 @@ async function bootstrap() {
   const express = require('express');
   app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 
-  const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',') || [
-    'http://localhost:3000',
-  ];
-
   app.enableCors({
-    origin: true, 
+    origin: ['http://localhost:3000','https://liteflix-fe.vercel.app'],
     methods: 'GET, POST, PUT, DELETE',
-    allowedHeaders: 'Content-Type, Authorization'
+    allowedHeaders: 'Content-Type',
   });
-  
 
   await app.listen(3001);
 }
