@@ -10,7 +10,7 @@ async function bootstrap() {
   app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 
   app.enableCors({
-    origin: ['http://localhost:3000','https://liteflix-fe.vercel.app'],
+    origin: '*',
     methods: 'GET, POST, PUT, DELETE',
     allowedHeaders: 'Content-Type',
   });
