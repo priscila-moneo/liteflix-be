@@ -1,20 +1,24 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import * as path from 'path';
-import { NestExpressApplication } from '@nestjs/platform-express';
+import { ExpressAdapter } from '@nestjs/platform-express';
+import * as express from 'express';
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  const server = express();
 
-  const express = require('express');
-  app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
+  const app = await NestFactory.create(AppModule, new ExpressAdapter(server));
 
   app.enableCors({
-    origin: '*',
+    origin: ['http://localhost:3000', 'http://192.168.68.103:3000', 'https://liteflix-fe.vercel.app'],
     methods: 'GET, POST, PUT, DELETE',
     allowedHeaders: 'Content-Type',
   });
 
-  await app.listen(3001);
+  await app.init();
+
+  const port = process.env.PORT || 3001;
+  server.listen(port, () => {
+  });
 }
+
 bootstrap();
