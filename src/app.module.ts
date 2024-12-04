@@ -5,10 +5,19 @@ import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb+srv://moneopriscila:A7LLwuAnMWlZBi9R@cluster.cntbh.mongodb.net/liteflix?retryWrites=true&w=majority&appName=Cluster'),
-    MoviesModule,
     ConfigModule.forRoot({
-      isGlobal: true, 
+      isGlobal: true,
+    }),
+    MoviesModule,
+    MongooseModule.forRootAsync({
+      useFactory: async () => {
+        try {
+          const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster.cntbh.mongodb.net/liteflix?retryWrites=true&w=majority&appName=Cluster`;
+          return { uri };
+        } catch (error) {
+          console.error("Error connecting to MongoDB:", error);
+        }
+      },
     }),
   ],
 })
