@@ -1,12 +1,9 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ExpressAdapter } from '@nestjs/platform-express';
-import * as express from 'express';
+import { FastifyAdapter } from '@nestjs/platform-fastify';
 
 async function bootstrap() {
-  const server = express();
-
-  const app = await NestFactory.create(AppModule, new ExpressAdapter(server));
+  const app = await NestFactory.create(AppModule, new FastifyAdapter());
 
   app.enableCors({
     origin: [
@@ -17,12 +14,10 @@ async function bootstrap() {
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type'],
   });
-
-  await app.init();
-
-  const port = +(process.env.PORT || 3001);
-
-  server.listen(port, '0.0.0.0', () => {});
+  await app.listen(process.env.PORT || 3001, '0.0.0.0', () => {
+    console.log('Server is running');
+  });
 }
 
 bootstrap();
+
