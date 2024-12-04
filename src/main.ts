@@ -6,11 +6,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, new FastifyAdapter());
 
   app.enableCors({
-    origin: [
-      'http://localhost:3000',
-      'http://192.168.68.103:3000',
-      'https://liteflix-fe.vercel.app',
-    ],
+    origin: '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type'],
   });
