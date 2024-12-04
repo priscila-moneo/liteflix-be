@@ -1,12 +1,23 @@
-import { Controller, Get, Post, Body, UploadedFile, UseInterceptors } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  UploadedFile,
+  UseInterceptors,
+  Get,
+  InternalServerErrorException,
+} from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { CreateMovieDto } from './dto/create-movie.dto';
 import { MoviesService } from './movies.service';
-import { FileInterceptor } from '@nestjs/platform-express';
-import { diskStorage } from 'multer';
+import { CloudinaryService } from 'src/services/cloudinary.service';
 
 @Controller('movies')
 export class MoviesController {
-  constructor(private readonly moviesService: MoviesService) {}
+  constructor(
+    private readonly moviesService: MoviesService,
+    private readonly cloudinaryService: CloudinaryService,
+  ) {}
 
   @Post()
   create(@Body() createMovieDto: CreateMovieDto) {
@@ -19,24 +30,20 @@ export class MoviesController {
   }
 
   @Post('upload')
-  @UseInterceptors(
-    FileInterceptor('image', {
-      storage: diskStorage({
-        destination: './uploads', 
-        filename: (req, file, cb) => {
-          cb(null, file.originalname);  
-        },
-      }),
-      limits: { fileSize: 5 * 1024 * 1024 },
-    }),
-  )
-  uploadFile(@UploadedFile() file) {
+  @UseInterceptors(FileInterceptor('image'))
+  async uploadFile(@UploadedFile() file: Express.Multer.File) {
     if (!file) {
-      return { message: 'No se subió ninguna imagen' };
+      throw new InternalServerErrorException('No se subió ninguna imagen');
     }
-    return {
-      message: 'Imagen subida correctamente',
-      file: file,
-    };
+
+    try {
+      const uploadedImage = await this.cloudinaryService.uploadImage(file);
+      return {
+        message: 'Imagen subida correctamente',
+        url: uploadedImage.secure_url,
+      };
+    } catch (error) {
+      throw new InternalServerErrorException('Error al subir la imagen', error.message);
+    }
   }
 }
