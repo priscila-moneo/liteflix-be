@@ -90,7 +90,7 @@ Una vez que el servidor esté corriendo, puedes interactuar con la API a través
 
 Este backend está desplegado en **Railway** para facilitar su acceso en producción. Puedes acceder a la aplicación en la siguiente URL:
 
-- **URL de producción**: [Enlace de Railway](liteflix-be-production.up.railway.app)
+- **URL de producción**: [Enlace de Railway](https://liteflix-be-production.up.railway.app)
 
 Además, la integración continua está configurada para ejecutarse automáticamente cada vez que se realiza un **merge** en la rama `main` en GitHub. Esto asegura que los cambios se desplieguen sin intervención manual, garantizando la continuidad del servicio.
 
