@@ -17,11 +17,3 @@ export class Movie extends Document {
 }
 
 export const MovieSchema = SchemaFactory.createForClass(Movie);
-
-export interface Movie {
-  id: number; 
-  title: string;
-  release_date: string;
-  backdrop_path: string;
-  vote_average: number;
-}

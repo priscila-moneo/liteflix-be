@@ -15,7 +15,7 @@ import { ConfigModule } from '@nestjs/config';
           const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster.cntbh.mongodb.net/liteflix?retryWrites=true&w=majority&appName=Cluster`;
           return { uri };
         } catch (error) {
-          console.error("Error connecting to MongoDB:", error);
+          console.error('Error connecting to MongoDB:', error);
         }
       },
     }),

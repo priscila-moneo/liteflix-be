@@ -43,7 +43,10 @@ export class MoviesController {
         url: uploadedImage.secure_url,
       };
     } catch (error) {
-      throw new InternalServerErrorException('Error al subir la imagen', error.message);
+      throw new InternalServerErrorException(
+        'Error al subir la imagen',
+        error.message,
+      );
     }
   }
 }

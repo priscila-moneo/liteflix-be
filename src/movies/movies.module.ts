@@ -6,7 +6,9 @@ import { Movie, MovieSchema } from './entities/movie.entity';
 import { CloudinaryService } from 'src/services/cloudinary.service';
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: Movie.name, schema: MovieSchema }])],
+  imports: [
+    MongooseModule.forFeature([{ name: Movie.name, schema: MovieSchema }]),
+  ],
   controllers: [MoviesController],
   providers: [MoviesService, CloudinaryService],
 })

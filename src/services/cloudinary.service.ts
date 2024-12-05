@@ -14,15 +14,14 @@ export class CloudinaryService {
 
   async uploadImage(file: any): Promise<any> {
     return new Promise((resolve, reject) => {
-      cloudinary.uploader.upload_stream(
-        { folder: 'uploads' },
-        (error, result) => {
+      cloudinary.uploader
+        .upload_stream({ folder: 'uploads' }, (error, result) => {
           if (error) {
             return reject(error);
           }
           resolve(result);
-        },
-      ).end(file.buffer);
+        })
+        .end(file.buffer);
     });
   }
 }
