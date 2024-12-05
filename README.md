@@ -3,8 +3,6 @@
 
 Este es el backend de Liteflix, una aplicación web para gestionar películas. Está construido con **NestJS**, un framework de Node.js para construir aplicaciones eficientes y escalables del lado del servidor.
 
-Puede verse en el siguiente link: http://[https://liteflix-fe.vercel.app/](https://liteflix-fe.vercel.app/)
-
 ## Índice
 
 - [Descripción](#descripción)
@@ -12,6 +10,7 @@ Puede verse en el siguiente link: http://[https://liteflix-fe.vercel.app/](https
 - [Tecnologías utilizadas](#tecnologías-utilizadas)
 - [Instalación](#instalación)
 - [Uso](#uso)
+- [Despliegue y CI/CD](#despliegue-y-cicd)
 
 ## Descripción
 
@@ -30,7 +29,6 @@ Este backend proporciona una API RESTful para gestionar las películas en Litefl
 - **Mongoose**: ODM para MongoDB que facilita la interacción con la base de datos.
 - **Cloudinary**: Plataforma de gestión de imágenes para almacenar y entregar imágenes de manera eficiente.
 - **Express**: Framework web para Node.js utilizado por NestJS.
-- **Fastify**: Framework que se usa como base para la carga de archivos.
 - **TypeScript**: Lenguaje de programación que proporciona tipado estático sobre JavaScript.
 - **Prettier**: Herramienta de formateo de código.
 - **Jest**: Framework de pruebas para realizar pruebas unitarias y de integración.
@@ -87,3 +85,12 @@ Una vez que el servidor esté corriendo, puedes interactuar con la API a través
 ### Subir imágenes
 
 - **POST /upload**: Subir una imagen de portada de película a Cloudinary.
+
+## Despliegue y CI/CD
+
+Este backend está desplegado en **Railway** para facilitar su acceso en producción. Puedes acceder a la aplicación en la siguiente URL:
+
+- **URL de producción**: [Enlace de Railway](liteflix-be-production.up.railway.app)
+
+Además, la integración continua está configurada para ejecutarse automáticamente cada vez que se realiza un **merge** en la rama `main` en GitHub. Esto asegura que los cambios se desplieguen sin intervención manual, garantizando la continuidad del servicio.
+
