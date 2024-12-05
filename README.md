@@ -84,7 +84,7 @@ Una vez que el servidor esté corriendo, puedes interactuar con la API a través
 
 ### Subir imágenes
 
-- **POST /upload**: Subir una imagen de portada de película a Cloudinary.
+- **POST /movies/upload**: Subir una imagen de portada de película a Cloudinary.
 
 ## Despliegue y CI/CD
 
