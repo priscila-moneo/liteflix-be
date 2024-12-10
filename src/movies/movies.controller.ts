@@ -20,9 +20,14 @@ export class MoviesController {
   ) {}
 
   @Post()
-  create(@Body() createMovieDto: CreateMovieDto) {
-    return this.moviesService.create(createMovieDto);
+  async create(@Body() createMovieDto: CreateMovieDto) {
+    try {
+      return await this.moviesService.create(createMovieDto);
+    } catch (error) {
+      throw new InternalServerErrorException(error.message);
+    }
   }
+
 
   @Get()
   findAll() {
